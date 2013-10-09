@@ -15,6 +15,9 @@ gem "devise", "~> 3.1.1"
 # API Framework
 gem "grape", "~> 0.6.0"
 
+# OAuth 2 Authorization Server
+gem "doorkeeper", "~> 0.7.3"
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
