@@ -3,7 +3,7 @@ Oauth2ApiSample::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'pages#welcome'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -53,4 +53,6 @@ Oauth2ApiSample::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  get "/pages/:action", :controller => :pages
 end
