@@ -18,6 +18,9 @@ gem "grape", "~> 0.6.0"
 # OAuth 2 Authorization Server
 gem "doorkeeper", "~> 0.7.3"
 
+# OAuth 2 Guard on Resource Server (API)
+gem "rack-oauth2", "~> 1.0.5"
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
