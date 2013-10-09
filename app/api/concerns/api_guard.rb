@@ -5,7 +5,7 @@ require 'rack/oauth2'
 module APIGuard
   extend ActiveSupport::Concern
 
-  included do
+  included do |base|
     # OAuth2 Resource Server Authentication
     use Rack::OAuth2::Server::Resource::Bearer, 'The API' do |request|
       # The authenticator only fetches the raw token string
@@ -15,6 +15,8 @@ module APIGuard
     end
 
     helpers HelperMethods
+
+    install_error_responders(base)
   end
 
   # Helper Methods for Grape Endpoint
@@ -82,6 +84,47 @@ module APIGuard
   end
 
   module ClassMethods
+    private
+    def install_error_responders(base)
+      error_classes = [ MissingTokenError, TokenNotFoundError,
+                        ExpiredError, RevokedError, InsufficientScopeError]
+
+      base.send :rescue_from, *error_classes, oauth2_bearer_token_error_handler
+    end
+
+    def oauth2_bearer_token_error_handler
+      Proc.new {|e|
+        response = case e
+          when MissingTokenError
+            Rack::OAuth2::Server::Resource::Bearer::Unauthorized.new
+
+          when TokenNotFoundError
+            Rack::OAuth2::Server::Resource::Bearer::Unauthorized.new(
+              :invalid_token,
+              "Bad Access Token.")
+
+          when ExpiredError
+            Rack::OAuth2::Server::Resource::Bearer::Unauthorized.new(
+              :invalid_token,
+              "Token is expired. You can either do re-authorization or token refresh.")
+
+          when RevokedError
+            Rack::OAuth2::Server::Resource::Bearer::Unauthorized.new(
+              :invalid_token,
+              "Token was revoked. You have to re-authorize from the user.")
+
+          when InsufficientScopeError
+            # FIXME: ForbiddenError (inherited from Bearer::Forbidden of Rack::Oauth2)
+            # does not include WWW-Authenticate header, which breaks the standard.
+            Rack::OAuth2::Server::Resource::Bearer::Forbidden.new(
+              :insufficient_scope,
+              Rack::OAuth2::Server::Resource::ErrorMethods::DEFAULT_DESCRIPTION[:insufficient_scope],
+              { :scope => e.scopes})
+          end
+
+        response.finish
+      }
+    end
   end
 
   #
