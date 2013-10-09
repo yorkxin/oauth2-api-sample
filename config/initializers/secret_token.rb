@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Oauth2ApiSample::Application.config.secret_key_base = '6b1488355a0815e692afc814b50331822ee43fcf5bfd68d89327d805b97ce60ec0f093077a1e4baecfe36c9720ec0cb76dc85de6ae6e0b595579b933f25ff6bb'
+Oauth2ApiSample::Application.config.secret_key_base = Settings.secret_key

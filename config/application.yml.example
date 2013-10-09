@@ -1,0 +1,19 @@
+defaults: &defaults
+
+development:
+  <<: *defaults
+
+  # Secret tokens. Generate them with `rake secret`
+  secret_key: ""
+
+test:
+  <<: *defaults
+
+  # Secret tokens. Generate them with `rake secret`
+  secret_key: ""
+
+production:
+  <<: *defaults
+
+  # Secret tokens. Generate them with `rake secret`
+  secret_key: ""
