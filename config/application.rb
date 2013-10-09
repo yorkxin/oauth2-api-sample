@@ -21,6 +21,8 @@ module Oauth2ApiSample
     # config.i18n.default_locale = :de
 
     config.paths.add "app/api", glob: "**/*.rb"
+    config.paths.add "app/services", glob: "**/*.rb"
     config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
+    config.autoload_paths += Dir["#{Rails.root}/app/services/*"]
   end
 end
