@@ -12,6 +12,9 @@ gem "settingslogic", "~> 2.0.9"
 # User System
 gem "devise", "~> 3.1.1"
 
+# API Framework
+gem "grape", "~> 0.6.0"
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
