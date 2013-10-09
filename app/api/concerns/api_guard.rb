@@ -25,6 +25,10 @@ module APIGuard
       # It could be nil. The authenticator does not check its existence.
       request.env[Rack::OAuth2::Server::Resource::ACCESS_TOKEN]
     end
+
+    def find_access_token(token_string)
+      Doorkeeper::AccessToken.authenticate(token_string)
+    end
   end
 
   module ClassMethods
