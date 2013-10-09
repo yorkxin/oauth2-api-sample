@@ -56,4 +56,6 @@ Oauth2ApiSample::Application.routes.draw do
   #   end
 
   get "/pages/:action", :controller => :pages
+
+  mount ApplicationAPI => '/api'
 end
