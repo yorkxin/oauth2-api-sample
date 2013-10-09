@@ -7,6 +7,7 @@ module V1
     end
 
     get "secret" do
+      guard!
       { :secret => "only smart guys can see this ;)" }
     end
   end

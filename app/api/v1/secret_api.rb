@@ -2,6 +2,8 @@ module V1
   class SecretAPI < Base
     namespace "secret"
 
+    guard_all!
+
     get "secret1" do
       { :secret1 => "Hi, #{current_user.email}" }
     end
