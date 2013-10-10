@@ -9,6 +9,12 @@ Most components are built with existing solutions:
 * Resource Server (API): [Grape](https://github.com/intridea/grape)
 * Resource Server Guard: [Rack::OAuth2](https://github.com/nov/rack-oauth2) (built from scratch, not using `doorkeeper_for` which is Rails-only)
 
+## Tutorials
+
+I've written the tutorial of this sample in my blog, however it's currently written only in Chinese. I'm going to publish an English version soon.
+
+中文版： [OAuth 2.0 Tutorial: Grape API 整合 Doorkeeper](http://blog.yorkxin.org/posts/2013/10/10/oauth2-tutorial-grape-api-doorkeeper)
+
 ## How to Run this App
 
 ### Ruby version
